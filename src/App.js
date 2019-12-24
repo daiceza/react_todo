@@ -1,6 +1,7 @@
 import React,{ Component } from 'react';
-import logo from './logo.svg';
+//import logo from './logo.svg';
 import './App.css';
+import ToDoItem from './components/ToDoItem';
 
 class App extends Component {
   constructor(){
@@ -38,18 +39,19 @@ class App extends Component {
     return (
       <div className="App">
         <ul>
-          {this.state.todos.map((item)=>{
+          {this.state.todos.map((item,key)=>{
           return(
-          <li>
-            <span>{item.text}</span>
-            <span onClick={this.deleteTodo.bind(this,item)}>[x]</span>
-          </li>
+            <ToDoItem
+              key={key}
+              text={item.text}
+              deleteTodo={this.deleteTodo.bind(this,item)}
+            />
           )
           })}
         </ul>
         <div>
           <input type="text" value={this.state.newTodo.text} onChange={this.handleInput}/>
-          <button onclick={this.createNewToDoItem}>+</button>
+          <button onClick={this.createNewToDoItem}>+</button>
         </div>
       </div>
     );
